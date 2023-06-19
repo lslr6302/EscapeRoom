@@ -80,8 +80,6 @@ public class Sudoku {
 				numToTakeAway--;
 			}
 		}
-		
-		System.out.println(row + ", " + col);
 	}
 	
 	void drawGraphics() {
