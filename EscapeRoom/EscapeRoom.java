@@ -6,11 +6,13 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import hsa2.GraphicsConsole;
 import javax.imageio.ImageIO;
 import gridGame.Sudoku;
 import pongGame.Pong;
+import finalProject.ShootingGame;
 
 public class EscapeRoom {
 	
@@ -30,7 +32,7 @@ public class EscapeRoom {
 	BufferedImage backImg, playerImg;
 	Rectangle door, drawing, tv, closet, drawer, carpet;
 	int difficulty;
-	boolean clearScreen = false;
+	boolean clearScreen = false, didPong = false, didSudoku = false, didShooting = false, win = false;
 	int playerX = 500, playerY = 600;
 	
 	EscapeRoom() {
@@ -46,6 +48,7 @@ public class EscapeRoom {
 			doMouseClick();
 			moveCharacter();
 			drawGraphics();
+			if (win) break;
 			gc.sleep(10);
 		}
 	}
@@ -84,22 +87,43 @@ public class EscapeRoom {
 		int mx = gc.getMouseX();
 		int my = gc.getMouseY();
 		
-		if (door.contains(mx, my)) System.out.println("door!");
-		if (drawing.contains(mx, my)) Sudoku.main(null);
-		if (tv.contains(mx, my)) Pong.main(null);
-		if (closet.contains(mx, my)) System.out.println("closet");
-		if (drawer.contains(mx, my)) System.out.println("drawer");
-		if (carpet.contains(mx, my)) System.out.println("carpet");
+		String s = "dont close";
+		
+		if (door.contains(mx, my)) if (checkWin()) win();
+		if (drawing.contains(mx, my)) {
+			if (!didSudoku) {
+				Sudoku.main(null);	
+				didSudoku = true;
+				return;
+			}
+		}
+		if (tv.contains(mx, my)) {
+			if (!didPong) {
+				new Pong(s);
+				didPong = true;
+				return;
+			}
+		}
+		if (closet.contains(mx, my)) gc.showDialog("There is nothing hiding here.", "Nice Try");
+		if (drawer.contains(mx, my)) gc.showDialog("There is nothing hiding here.", "Nice Try");
+		if (carpet.contains(mx, my)) {
+			if (!didShooting) {
+				ShootingGame.main(null);
+				didShooting = true;
+				return;
+			}
+		}
 	}
 	
 	//setup page when winning
 	void win() {
-		
+		gc.showDialog("You win!!!", "You win!!!");
+		gc.close();
+		win = true;
 	}
 	
-	//setup page when losing
-	void lost() {
-		
+	boolean checkWin() {
+		return didPong && didSudoku && didShooting;
 	}
 	
 	void moveCharacter() {
