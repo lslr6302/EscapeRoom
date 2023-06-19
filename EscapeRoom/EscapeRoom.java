@@ -10,9 +10,9 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import hsa2.GraphicsConsole;
 import javax.imageio.ImageIO;
-import gridGame.Sudoku;
-import pongGame.Pong;
-import finalProject.ShootingGame;
+import sudoku.Sudoku;
+import pong.Pong;
+import shootingGame.ShootingGame;
 
 public class EscapeRoom {
 	
