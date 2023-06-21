@@ -1,0 +1,14 @@
+package Finalproject;
+
+import javax.swing.JOptionPane;
+public class Instructions {
+
+	    public static void main(String[] args) {
+	        String instructions = "Instructions:\n"
+	                + "You have entered the Spooks Escape Room.\n"
+	                + "- Click in the room to find where the hidden games are to win the exit key for the escape room.\n"
+	                + "- You are only able to play each game once or else you have lost :( \n"
+	                + "- Good Luck!!";
+	        JOptionPane.showMessageDialog(null, instructions, "Game Instructions", JOptionPane.INFORMATION_MESSAGE);
+	    }
+	}
