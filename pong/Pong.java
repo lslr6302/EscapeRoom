@@ -3,10 +3,11 @@ package pongGame;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Rectangle;
+import javax.swing.JFrame;
 import hsa2.GraphicsConsole;
 
 public class Pong {
-
+	
 	public static void main(String[] args) {
 		new Pong();
 	}
@@ -15,7 +16,7 @@ public class Pong {
 	GraphicsConsole gc = new GraphicsConsole(WINW, WINH);
 	
 	Ball b = new Ball(100, 220);  //the ball
-	Paddle p1 = new Paddle(100, 220, 10, 100);  //2 paddles for 2 players
+	Paddle p1 = new Paddle(100, 220, 10, 100);
 	Paddle p2 = new Paddle(890, 220, 10, 100);
 	int sleepTime = 5;
 	
@@ -47,6 +48,7 @@ public class Pong {
 			moveLeftPaddle(p1);
 			moveRightPaddle(p2);
 			checkCollision();
+			checkCollision2();
 			drawGraphics();
 			if (checkWin()) {
 				gc.showDialog("A Winner has appeared!!!", "Congragulations!");
